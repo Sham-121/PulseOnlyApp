@@ -82,12 +82,14 @@ def enableMinifyInReleaseBuilds = (findProperty('android.enableMinifyInReleaseBu
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
 android {
-    ndkVersion rootProject.ext.ndkVersion
+    // Use properties from gradle.properties (safe) or fallback to numeric values
+    ndkVersion findProperty("android.ndkVersion") ?: "27.1.12297006"
+    buildToolsVersion findProperty("android.buildToolsVersion") ?: "36.0.0"
 
-    buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdkVersion Integer.parseInt(findProperty('android.compileSdkVersion') ?: '36')
 
     namespace 'com.ppg.nativeapp'
+
     defaultConfig {
         applicationId "com.ppg.nativeapp"
         minSdkVersion Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
@@ -97,6 +99,8 @@ android {
 
         buildConfigField "String", "REACT_NATIVE_RELEASE_LEVEL", "\"${findProperty('reactNativeReleaseLevel') ?: 'stable'}\""
     }
+    // ... keep the rest of the file unchanged
+
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
