@@ -1,0 +1,37 @@
+// Top-level build file for Android (root build.gradle)
+
+buildscript {
+    ext {
+        buildToolsVersion = findProperty('android.buildToolsVersion') ?: '36.0.0'
+        minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
+        compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '36')
+        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '36')
+        kotlinVersion = findProperty('android.kotlinVersion') ?: '2.0.21'
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        // Specify Android Gradle Plugin compatible with Gradle and Kotlin versions.
+        classpath('com.android.tools.build:gradle:8.1.1')
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath('com.facebook.react:react-native-gradle-plugin')
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+        maven { url 'https://www.jitpack.io' }
+        // Expo-specific maven locations (keep if using expo prebuild)
+        maven { url("${rootDir}/../node_modules/expo/android/maven") }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
