@@ -1,7 +1,15 @@
+buildscript {
+    dependencies {
+        classpath 'org.codehaus.groovy:groovy-all:3.0.9'
+    }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.facebook.react'
 apply plugin: 'com.google.gms.google-services'
+import groovy.json.JsonSlurper
+
 
 react {
     jsBundleDir = "$buildDir/generated/assets/react/release"
@@ -9,12 +17,10 @@ react {
     assetsDir = "$buildGencacheDir/react/release"
 }
 
-/**
- * This is the configuration block to find and set the HERMES_SIDE_DIR
- */
+
 def hermesCommand = new File(
         reactNativeDir,
-        "packages/react-native/scripts/hermes/hermes-cli.js"
+        "sdks/hermesc/%OS-BIN%/hermesc"
 )
 def hermesEndpoint = new File(
         project.buildDir,
@@ -25,7 +31,7 @@ def HERMES_SIDE_DIR = new File(
         "packages/react-native/ReactAndroid/src/main/jni/first-party/hermes/android"
 )
 if (hermesEndpoint.exists()) {
-    def hermesPath = new groovy.json.JsonSlurper().parseText(hermesEndpoint.text).path
+    def hermesPath = new JsonSlurper().parseText(hermesEndpoint.text).path
     HERMES_SIDE_DIR = new File(hermesPath).getParentFile()
 }
 
