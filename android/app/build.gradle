@@ -82,25 +82,21 @@ def enableMinifyInReleaseBuilds = (findProperty('android.enableMinifyInReleaseBu
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
 android {
-    // Use properties from gradle.properties (safe) or fallback to numeric values
-    ndkVersion findProperty("android.ndkVersion") ?: "27.1.12297006"
-    buildToolsVersion findProperty("android.buildToolsVersion") ?: "36.0.0"
+    ndkVersion rootProject.ext.ndkVersion
 
-    compileSdkVersion Integer.parseInt(findProperty('android.compileSdkVersion') ?: '36')
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdk rootProject.ext.compileSdkVersion
 
     namespace 'com.ppg.nativeapp'
-
     defaultConfig {
-        applicationId "com.ppg.nativeapp"
-        minSdkVersion Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
-        targetSdkVersion Integer.parseInt(findProperty('android.targetSdkVersion') ?: '36')
+        applicationId 'com.ppg.nativeapp'
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
 
         buildConfigField "String", "REACT_NATIVE_RELEASE_LEVEL", "\"${findProperty('reactNativeReleaseLevel') ?: 'stable'}\""
     }
-    // ... keep the rest of the file unchanged
-
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -159,11 +155,6 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-    implementation "androidx.camera:camera-core:1.2.3"
-    implementation "androidx.camera:camera-camera2:1.2.3"
-    implementation "androidx.camera:camera-lifecycle:1.2.3"
-    implementation "androidx.camera:camera-view:1.2.3"
-
 
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";
     def isWebpEnabled = (findProperty('expo.webp.enabled') ?: "") == "true";

@@ -23,16 +23,13 @@ class MainApplication : Application(), ReactApplication {
   override val reactNativeHost: ReactNativeHost = ReactNativeHostWrapper(
       this,
       object : DefaultReactNativeHost(this) {
-        override fun getPackages(): List<ReactPackage> =
-            PackageList(this).packages.apply {
-              // Packages that cannot be autolinked yet can be added manually here, for example:
-              // add(MyReactNativePackage())
-              val packages = PackageList(this).packages.toMutableList()
-              // add PpgPackage
-              packages.add(PpgPackage())
-              return packages
+        override fun getPackages(): List<ReactPackage> {
+        val pkgList = PackageList(this@MainApplication).packages.toMutableList()
+        // add any manual packages here
+        pkgList.add(com.ppg.nativeapp.ppg.PpgPackage())
+        return pkgList
+}
 
-            }
 
           override fun getJSMainModuleName(): String = ".expo/.virtual-metro-entry"
 

@@ -214,17 +214,22 @@ class PpgModule(private val reactContext: ReactApplicationContext) : ReactContex
     }
 
     private fun movingAverage(signal: DoubleArray, window: Int): DoubleArray {
-        val out = DoubleArray(signal.size)
-        val half = window/2
-        for (i in signal.indices) {
-            var sum = 0.0; var cnt = 0
-            for (j in max(0, i-half) .. min(signal.size-1, i+half)) {
-                sum += signal[j]; cnt++
+            val out = DoubleArray(signal.size)
+            val half = window / 2
+            for (i in signal.indices) {
+                var sum = 0.0
+                var cnt = 0
+                val start = max(0, i - half)
+                val end = min(signal.size - 1, i + half)
+                for (j in start..end) {
+                    sum += signal[j]
+                    cnt++
+                }
+                out[i] = sum / max(1, cnt)
             }
-            out[i] = sum / max(1, cnt)
+            return out
         }
-        return out
-    }
+
 
     private fun butterworthBandpass(x: DoubleArray, fs: Double, fLow: Double, fHigh: Double): DoubleArray {
         fun designBiquadBandpass(fc: Double, q: Double, fs: Double): DoubleArray {
@@ -273,18 +278,19 @@ class PpgModule(private val reactContext: ReactApplicationContext) : ReactContex
     }
 
     private fun findBestLag(ac: DoubleArray, fs: Double, fMin: Double, fMax: Double): Double {
-        val n = ac.size
-        val lagMin = max(1, floor(fs / fMax).toInt())
-        val lagMax = min(n - 1, ceil(fs / fMin).toInt())
-        var bestLag = -1
-        var bestVal = Double.NEGATIVE_INFINITY
-        for (lag in lagMin..lagMax) {
-            val valLag = ac[lag]
-            if (valLag > bestVal) {
-                bestVal = valLag
-                bestLag = lag
+            val n = ac.size
+            val lagMin = max(1, floor(fs / fMax).toInt())
+            val lagMax = min(n - 1, ceil(fs / fMin).toInt())
+            var bestLag = -1
+            var bestVal = Double.NEGATIVE_INFINITY
+            for (lag in lagMin..lagMax) {
+                val valLag = ac[lag]
+                if (valLag > bestVal) {
+                    bestVal = valLag
+                    bestLag = lag
+                }
             }
+            return if (bestLag > 0) bestLag.toDouble() / fs else -1.0
         }
-        return if (bestLag > 0) bestLag.toDouble() / fs else -1.0
-    }
+
 }

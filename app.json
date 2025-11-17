@@ -8,22 +8,7 @@
     "platforms": [
       "android"
     ],
-    "android": {
-      "package": "com.ppg.nativeapp",
-      "permissions": [
-        "CAMERA",
-        "FLASHLIGHT",
-        "VIBRATE",
-        "WAKE_LOCK"
-      ],
-      "versionCode": 1
-    },
-    "ios": {
-      "supportsTablet": false,
-      "infoPlist": {
-        "NSCameraUsageDescription": "PPGNativeApp needs camera access to measure heart rate using your fingertip."
-      }
-    },
+
     "extra": {
       "eas": {
         "projectId": "d5c0a63f-53b2-4dec-88d6-a5619ee59589"
