@@ -8,11 +8,13 @@
     "platforms": [
       "android"
     ],
-
     "extra": {
       "eas": {
         "projectId": "d5c0a63f-53b2-4dec-88d6-a5619ee59589"
       }
+    },
+    "android": {
+      "package": "com.ppg.nativeapp"
     }
   }
 }

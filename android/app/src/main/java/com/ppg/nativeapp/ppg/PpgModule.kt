@@ -1,4 +1,4 @@
-package com.ppg.nativeapp.ppg
+package com.shantanu_thakur.ppgnativeapp.ppg
 
 import android.Manifest
 import android.content.pm.PackageManager

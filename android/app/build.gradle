@@ -52,13 +52,13 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.ppg.nativeapp"
+    namespace 'com.ppg.nativeapp'
     defaultConfig {
-        applicationId "com.ppg.nativeapp"
+        applicationId 'com.ppg.nativeapp'
         minSdk rootProject.ext.minSdkVersion
         targetSdk rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         missingDimensionStrategy "react-native-camera", "general"
     }
     signingConfigs {

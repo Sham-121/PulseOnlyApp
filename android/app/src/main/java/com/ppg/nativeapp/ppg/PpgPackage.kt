@@ -1,4 +1,4 @@
-package com.ppg.nativeapp.ppg
+package com.shantanu_thakur.ppgnativeapp.ppg
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule

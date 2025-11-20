@@ -1,5 +1,5 @@
-package com.ppg.nativeapp
-import com.ppg.nativeapp.ppg.PpgPackage
+package com.shantanu_thakur.ppgnativeapp
+import com.shantanu_thakur.ppgnativeapp.ppg.PpgPackage
 
 
 import android.app.Application

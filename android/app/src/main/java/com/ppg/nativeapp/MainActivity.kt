@@ -1,4 +1,4 @@
-package com.ppg.nativeapp
+package com.shantanu_thakur.ppgnativeapp
 
 import android.os.Build
 import android.os.Bundle
