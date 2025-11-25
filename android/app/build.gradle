@@ -14,7 +14,7 @@ import groovy.json.JsonSlurper
 react {
     jsBundleDir = "$buildDir/generated/assets/react/release"
     resourcesDir = "$buildDir/generated/res/react/release"
-    assetsDir = "$buildGencacheDir/react/release"
+    assetsDir = "$buildDir/react/release"
 }
 
 
@@ -134,11 +134,5 @@ dependencies {
     }
 }
 
-apply from: new File(reactNativeDir, "gradle.properties")
 apply from: new File(reactNativeDir, "react.gradle")
 apply from: new File(reactNativeDir, "hermes.gradle")
-
-// We specify the side-by-side NDK version to use.
-// This is the same version specified in react-native, and NDK 23 is recommended
-// for M1 macs
-ndkVersion = rootProject.ext.ndkVersion
